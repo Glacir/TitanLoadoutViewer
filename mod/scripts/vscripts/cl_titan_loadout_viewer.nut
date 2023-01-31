@@ -64,14 +64,17 @@ int function AddTitanLoadoutIcons(entity player, var rui, int index)
 {
 	if (GetConVarBool("titanloadoutviewer_enable"))
 	{
-		if (player.IsTitan())
-		{
-			return AddTitanLoadoutIconsInternal(player, rui, index)
-		}
-		else if (player.GetPetTitan() != null)
-		{
-			return index // TODO deal with pet titan
-		}
+        if (IsValid( player ) && player.IsPlayer() && IsAlive(player))
+        {
+            if (player.IsTitan() && )
+            {
+                return AddTitanLoadoutIconsInternal(player, rui, index)
+            }
+            else if (player.GetPetTitan() != null)
+            {
+                return index // TODO deal with pet titan
+            }
+        }
 	}
     return index
 }
