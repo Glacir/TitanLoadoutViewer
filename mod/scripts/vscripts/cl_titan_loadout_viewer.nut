@@ -1,8 +1,7 @@
-// global function addLoadoutIcons
 global function AddTitanLoadoutIcons
 
 
-array < int > unique_passives = [
+array<int> unique_passives = [
     ePassives.PAS_RONIN_WEAPON,
     ePassives.PAS_NORTHSTAR_WEAPON,
     ePassives.PAS_ION_WEAPON,
@@ -40,7 +39,7 @@ array < int > unique_passives = [
     ePassives.PAS_VANGUARD_DOOM
 ]
 
-array < int > general_passives = [
+array<int> general_passives = [
     ePassives.PAS_BUILD_UP_NUCLEAR_CORE,
     ePassives.PAS_HYPER_CORE,
     ePassives.PAS_ENHANCED_TITAN_AI,
@@ -49,6 +48,17 @@ array < int > general_passives = [
     ePassives.PAS_AUTO_EJECT
 ]
 
+array<int> monarch_upgrades = [
+	ePassives.PAS_VANGUARD_CORE1,
+	ePassives.PAS_VANGUARD_CORE2,
+	ePassives.PAS_VANGUARD_CORE3,
+	ePassives.PAS_VANGUARD_CORE4,
+	ePassives.PAS_VANGUARD_CORE5,
+	ePassives.PAS_VANGUARD_CORE6,
+	ePassives.PAS_VANGUARD_CORE7,
+	ePassives.PAS_VANGUARD_CORE8,
+	ePassives.PAS_VANGUARD_CORE9
+]
 
 int function AddTitanLoadoutIcons(entity player, var rui, int index)
 {
@@ -63,11 +73,11 @@ int function AddTitanLoadoutIcons(entity player, var rui, int index)
     return index
 }
 
-int function AddTitanLoadoutIconsInternal(entity soul, var rui, int index)
+int function AddTitanLoadoutIconsInternal(entity player, var rui, int index)
 {
     foreach(passive in general_passives)
 	{
-        if (soul.HasPassive(passive))
+        if (player.HasPassive(passive))
 		{
             string passiveRef = PassiveEnumFromBitfield(passive)
             RuiSetImage(rui, "extraIcon" + index, GetItemImage(passiveRef))
@@ -77,7 +87,7 @@ int function AddTitanLoadoutIconsInternal(entity soul, var rui, int index)
     }
     foreach(passive in unique_passives)
 	{
-        if (soul.HasPassive(passive))
+        if (player.HasPassive(passive))
 		{
             string passiveRef = PassiveEnumFromBitfield(passive)
             RuiSetImage(rui, "extraIcon" + index, GetItemImage(passiveRef))
@@ -85,5 +95,28 @@ int function AddTitanLoadoutIconsInternal(entity soul, var rui, int index)
             break
         }
     }
+	entity titan = player
+	if (GetTitanClass(titan) == "vanguard")
+	{
+		printt("----------------")
+		printt(player.GetPlayerName())
+		foreach (core in monarch_upgrades) {
+			if(player.HasPassive(core))
+			{
+				string passiveRef = PassiveEnumFromBitfield(core)
+				printt(Localize(GetItemName(passiveRef)))
+			}
+		}
+		printt("----------------")
+	}
     return index
+}
+
+
+string function GetTitanClass( entity titan )
+{
+	entity soul = titan.GetTitanSoul()
+	string settingsName = PlayerSettingsIndexToName( soul.GetPlayerSettingsNum() )
+
+	return expect string( Dev_GetPlayerSettingByKeyField_Global( settingsName, "titanCharacterName" ) )
 }
