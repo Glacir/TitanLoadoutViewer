@@ -20,7 +20,7 @@
 	],
 	"ConVars": [
 		{
-		  "Name": "tlv_enable",
+		  "Name": "titanloadoutviewer_enable",
 		  "DefaultValue": "1"
 		}
 	]
