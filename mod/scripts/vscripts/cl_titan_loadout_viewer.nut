@@ -66,7 +66,7 @@ int function AddTitanLoadoutIcons(entity player, var rui, int index)
 	{
         if (IsValid( player ) && player.IsPlayer() && IsAlive(player))
         {
-            if (player.IsTitan() && )
+            if (player.IsTitan())
             {
                 return AddTitanLoadoutIconsInternal(player, rui, index)
             }
