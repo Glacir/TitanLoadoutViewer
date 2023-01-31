@@ -52,26 +52,33 @@ array < int > general_passives = [
 
 int function AddTitanLoadoutIcons(entity player, var rui, int index)
 {
-    if (player.IsTitan()) {
+    if (player.IsTitan())
+	{
         return AddTitanLoadoutIconsInternal(player, rui, index)
-    } else if () {
-        // TODO get pet titan
+    }
+	else if (player.GetPetTitan() != null)
+	{
+        return index // TODO deal with pet titan
     }
     return index
 }
 
 int function AddTitanLoadoutIconsInternal(entity soul, var rui, int index)
 {
-    foreach(passive in general_passives) {
-        if (player.HasPassive(passive)) {
+    foreach(passive in general_passives)
+	{
+        if (soul.HasPassive(passive))
+		{
             string passiveRef = PassiveEnumFromBitfield(passive)
             RuiSetImage(rui, "extraIcon" + index, GetItemImage(passiveRef))
             index++
             break
         }
     }
-    foreach(passive in unique_passives) {
-        if (player.HasPassive(passive)) {
+    foreach(passive in unique_passives)
+	{
+        if (soul.HasPassive(passive))
+		{
             string passiveRef = PassiveEnumFromBitfield(passive)
             RuiSetImage(rui, "extraIcon" + index, GetItemImage(passiveRef))
             index++
@@ -80,30 +87,3 @@ int function AddTitanLoadoutIconsInternal(entity soul, var rui, int index)
     }
     return index
 }
-
-// int statusIndex = ePlayerStatusType.PTS_TYPE_NONE
-// entity titan
-// if ( teamPlayer.GetPetTitan() )
-// 	titan = teamPlayer.GetPetTitan()
-// else if ( teamPlayer.IsTitan() )
-// 	titan = teamPlayer
-
-// entity playerParent = teamPlayer.GetParent()
-// bool playerIsInDropship = playerParent != null && IsDropship( playerParent )
-
-// if ( playerIsInDropship && ( GetWaveSpawnType() == eWaveSpawnType.DROPSHIP || GetGameState() == eGameState.Epilogue ) )
-// {
-// 	statusIndex = ePlayerStatusType.PTS_TYPE_EVAC
-// }
-// else if ( titan && titan.GetTitanSoul() )
-// {
-// 	if ( !teamPlayer.IsTitan() )
-// 	{
-// 		if ( IsAlive( teamPlayer ) )
-// 			statusIndex = ePlayerStatusType.PTS_TYPE_PILOT_TITAN
-// 		else
-// 			statusIndex = ePlayerStatusType.PTS_TYPE_DEAD_PILOT_TITAN
-// 	}
-// 	else
-// 	{
-// 		if ( !IsAlive( teamPlayer ) )
