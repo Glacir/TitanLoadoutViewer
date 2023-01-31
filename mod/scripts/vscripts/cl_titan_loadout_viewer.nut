@@ -62,14 +62,17 @@ array<int> monarch_upgrades = [
 
 int function AddTitanLoadoutIcons(entity player, var rui, int index)
 {
-    if (player.IsTitan())
+	if (GetConVarBool("titanloadoutviewer_enable"))
 	{
-        return AddTitanLoadoutIconsInternal(player, rui, index)
-    }
-	else if (player.GetPetTitan() != null)
-	{
-        return index // TODO deal with pet titan
-    }
+		if (player.IsTitan())
+		{
+			return AddTitanLoadoutIconsInternal(player, rui, index)
+		}
+		else if (player.GetPetTitan() != null)
+		{
+			return index // TODO deal with pet titan
+		}
+	}
     return index
 }
 

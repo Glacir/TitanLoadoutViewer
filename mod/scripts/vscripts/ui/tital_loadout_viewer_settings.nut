@@ -7,5 +7,5 @@ void function TitanLoadoutViewerSettings()
 	// General
 	AddModCategory("General")
 
-	AddConVarSettingEnum("tlv_enable", "Enable display ", [ "No", "Yes" ])
+	AddConVarSettingEnum("titanloadoutviewer_enable", "Enable ", [ "No", "Yes" ])
 }
