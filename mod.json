@@ -1,0 +1,27 @@
+{
+	"Name": "TitanLoadoutViewer",
+	"Description": "Displays everyone's loadouts next to their names on the scoreboard in vanilla FD mode. Created by FlameRaptor. Inspired by Khalmee.TeamLoadoutViewer",
+	"LoadPriority": 2,
+	"RequiredOnClient": false,
+	"Version": "1.0.0",
+	"Scripts": [
+		{
+			"Path": "cl_titan_loadout_viewer.nut",
+			"RunOn": "CLIENT"
+		}
+		,
+		{
+            "Path": "ui/tital_loadout_viewer_settings.nut",
+            "RunOn": "UI",
+            "UICallback": {
+                "Before": "TitanLoadoutViewerSettings"
+            }
+		}
+	],
+	"ConVars": [
+		{
+		  "Name": "tlv_enable",
+		  "DefaultValue": "1"
+		}
+	]
+}
