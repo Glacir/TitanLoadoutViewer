@@ -125,10 +125,11 @@ void function AddTitanLoadoutIcons( entity player, var rui) {
 		{
 			if ( player.HasPassive( passive ) )
 			{
-				// RuiSetImage( rui, "extraIcon" + 4, GetItemImage( PassiveEnumFromBitfield( passive ) ) )
-				printt(PassiveEnumFromBitfield( passive ))
-
-				printt(Localize( GetItemName( PassiveEnumFromBitfield( passive ) ) ))
+				string passiveRef = PassiveEnumFromBitfield( passive )
+				// printt(passiveName)
+				// int kitIndex = GetItemIndexOfTypeByRef( GetItemType( passiveName ), passiveName )
+				// printt(Localize( GetItemName(passiveName ) ))
+				RuiSetImage( rui, "extraIcon" + 4, GetItemImage( passiveRef ) )
 				break
 			}
 		}
@@ -136,18 +137,12 @@ void function AddTitanLoadoutIcons( entity player, var rui) {
 		{
 			if ( player.HasPassive( passive ) )
 			{
-				// RuiSetImage( rui, "extraIcon" + 5, GetItemImage( PassiveEnumFromBitfield( passive ) ) )
-				printt(PassiveEnumFromBitfield( passive ))
-				printt(Localize( GetItemName( PassiveEnumFromBitfield( passive ) ) ))
+				string passiveRef = PassiveEnumFromBitfield( passive )
+				// printt(Localize( GetItemName( PassiveEnumFromBitfield( passive ) ) ))
+				RuiSetImage( rui, "extraIcon" + 5, GetItemImage( passiveRef ) )
 				break
 			}
 		}
-		printt("------------------------------")
-		string kit1 = string( player.GetPersistentVar( "activeTitanLoadout.passive1" ) )
-		string kit2 = string( player.GetPersistentVar( "activeTitanLoadout.passive2" ) )
-		printt(kit1)
-		printt(kit2)
-		printt("------------------------------")
 
 	}
 	else
