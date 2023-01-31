@@ -2453,7 +2453,9 @@ void function FD_ScoreboardUpdate( entity player, var rui )
 	int numCoreOverload = player.GetPlayerNetInt( "numSuperRodeoGrenades" )
 
 	int index = 0
-	for ( int i=0; i<numTurrets; i++ )
+	index = AddTitanLoadoutIcons(player, rui, index)
+
+	for ( int i = 0; i < numTurrets; i++ )
 	{
 		RuiSetImage( rui, "extraIcon" + index++, $"rui/menu/boosts/boost_icon_personel_sentry" )
 	}
@@ -2464,13 +2466,11 @@ void function FD_ScoreboardUpdate( entity player, var rui )
 	if ( numCoreOverload > 0 )
 		RuiSetImage( rui, "extraIcon" + index++, $"rui/menu/boosts/boost_icon_core_overload" )
 
-		// HERE
 
 	while ( index < 6 ) // 6 is number of slots
 	{
 		RuiSetImage( rui, "extraIcon" + index++, $"" )
 	}
-	AddTitanLoadoutIcons(player, rui)
 }
 
 void function ServerCallback_FD_NotifyMVP( int playerHandle )

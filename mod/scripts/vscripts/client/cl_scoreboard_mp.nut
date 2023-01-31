@@ -613,7 +613,7 @@ void function ShowScoreboardMP()
 					RuiSetInt( rui, "micState", MIC_STATE_NO_MIC )
 				}
 				//CHANGED BY ME FOR THE MOD
-				AddTitanLoadoutIcons( player, rui )
+				AddTitanLoadoutIcons( player, rui, 0 )
 				//END OF CHANGE
 				UpdateScoreboardForGamemode( player, rui, Hud_GetRui( file.header.scoreHeader ) )
 
