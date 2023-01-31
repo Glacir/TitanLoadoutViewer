@@ -1,5 +1,5 @@
 {
-	"Name": "TitanLoadoutViewer",
+	"Name": "Titan Loadout Viewer",
 	"Description": "Displays everyone's titan loadouts next to their names on the scoreboard. Created by FlameRaptor. Inspired by Khalmee.TeamLoadoutViewer",
 	"LoadPriority": 2,
 	"RequiredOnClient": false,
