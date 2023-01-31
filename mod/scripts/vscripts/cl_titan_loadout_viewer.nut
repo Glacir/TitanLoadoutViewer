@@ -81,17 +81,17 @@ int function AddTitanLoadoutIcons(entity player, var rui, int index)
 
 int function AddTitanLoadoutIconsInternal(entity player, var rui, int index)
 {
-    foreach(passive in general_passives)
-	{
+    foreach(passive in unique_passives)
+    {
         if (player.HasPassive(passive))
-		{
+        {
             string passiveRef = PassiveEnumFromBitfield(passive)
             RuiSetImage(rui, "extraIcon" + index, GetItemImage(passiveRef))
             index++
             break
         }
     }
-    foreach(passive in unique_passives)
+    foreach(passive in general_passives)
 	{
         if (player.HasPassive(passive))
 		{
