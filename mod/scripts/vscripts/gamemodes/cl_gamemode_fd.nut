@@ -2471,6 +2471,8 @@ void function FD_ScoreboardUpdate( entity player, var rui )
 	{
 		RuiSetImage( rui, "extraIcon" + index++, $"" )
 	}
+
+	PrintPlayerItemsCount(player)
 }
 
 void function ServerCallback_FD_NotifyMVP( int playerHandle )

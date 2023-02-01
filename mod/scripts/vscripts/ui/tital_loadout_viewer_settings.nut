@@ -7,5 +7,6 @@ void function TitanLoadoutViewerSettings()
 	// General
 	AddModCategory("General")
 
-	AddConVarSettingEnum("titanloadoutviewer_enable", "Enable ", [ "No", "Yes" ])
+	AddConVarSettingEnum("titanloadoutviewer_enable", "Enable Icon Display", [ "No", "Yes" ])
+	AddConVarSettingEnum("titanloadoutviewer_print_fd_items_count", "Print FD items count", [ "No", "Yes" ])
 }

@@ -22,6 +22,10 @@
 		{
 		  "Name": "titanloadoutviewer_enable",
 		  "DefaultValue": "1"
+		},
+		{
+			"Name": "titanloadoutviewer_print_fd_items_count",
+			"DefaultValue": "1"
 		}
 	]
 }

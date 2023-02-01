@@ -1,4 +1,5 @@
 global function AddTitanLoadoutIcons
+global function PrintPlayerItemsCount
 
 
 array<int> unique_passives = [
@@ -60,6 +61,8 @@ array<int> monarch_upgrades = [
 	ePassives.PAS_VANGUARD_CORE9
 ]
 
+table<string, float> last_print_time
+
 int function AddTitanLoadoutIcons(entity player, var rui, int index)
 {
 	if (GetConVarBool("titanloadoutviewer_enable"))
@@ -101,23 +104,61 @@ int function AddTitanLoadoutIconsInternal(entity player, var rui, int index)
             break
         }
     }
-	entity titan = player
-	if (GetTitanClass(titan) == "vanguard")
-	{
-		printt("----------------")
-		printt(player.GetPlayerName())
-		foreach (core in monarch_upgrades) {
-			if(player.HasPassive(core))
-			{
-				string passiveRef = PassiveEnumFromBitfield(core)
-				printt(Localize(GetItemName(passiveRef)))
-			}
-		}
-		printt("----------------")
-	}
     return index
 }
 
+void function PrintPlayerItemsCount( entity player ) {
+    if (!GetConVarBool("titanloadoutviewer_print_fd_items_count"))
+        return
+
+    if (!IsValid( player ) || !player.IsPlayer())
+        return
+
+    float cur_time = Time()
+    string player_name = player.GetPlayerName()
+    if (!ShouldPrintInfo(player_name, cur_time))
+        return
+
+    last_print_time[player_name] <- cur_time
+    int numTurrets = player.GetPlayerNetInt( "burn_numTurrets" )
+    int numShieldBoosts = player.GetPlayerNetInt( "numHarvesterShieldBoost" )
+    int numCoreOverload = player.GetPlayerNetInt( "numSuperRodeoGrenades" )
+
+    printt("----------------")
+    printt(player_name)
+    printt(format("Turrets: %i", numTurrets))
+    printt(format("Shield Boosts: %i", numShieldBoosts))
+    printt(format("Nuke Rodeos: %i", numCoreOverload))
+
+    if (player.IsTitan() && IsAlive(player))
+    {
+        entity titan = player
+        if (GetTitanClass(titan) == "vanguard")
+        {
+            foreach (core in monarch_upgrades) {
+                if(player.HasPassive(core))
+                {
+                    string passiveRef = PassiveEnumFromBitfield(core)
+                    printt(Localize(GetItemName(passiveRef)))
+                }
+            }
+        }
+    }
+    printt("----------------")
+}
+
+bool function ShouldPrintInfo( string player_name, float cur_time )
+{
+    if (!(player_name in last_print_time))
+    {
+        return true
+    }
+    else
+    {
+        return cur_time - last_print_time[player_name] > 5.0
+    }
+    unreachable
+}
 
 string function GetTitanClass( entity titan )
 {
