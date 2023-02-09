@@ -8,6 +8,7 @@ Display everyone's titan loadouts next to their names on the scoreboard in FD mo
 
 - Display team titan loadouts on the scoreboard
 - Print items count in console
+- Force disable minimap and HUD enemy icons
 
 ## Dependecies
 
