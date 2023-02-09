@@ -868,16 +868,15 @@ void function UpdateMinimapVisibility()
 			Minimap_DisableDraw()
 		}
 	}
+	else if (GetConVarBool("titanloadoutviewer_fd_force_hide_minimap"))
+	{
+		Minimap_DisableDraw()
+	}
 	else
 	{
 		Minimap_EnableDraw()
 	}
 
-	// GtJt HUD
-	if (GetConVarBool("comp_fd_master_to_insane") && FD_GetDifficultyLevel() == eFDDifficultyLevel.MASTER)
-	{
-		Minimap_DisableDraw()
-	}
 #endif
 }
 

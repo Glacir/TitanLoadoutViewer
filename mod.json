@@ -3,7 +3,7 @@
 	"Description": "Display everyone's titan loadouts next to their names on the scoreboard. Created by FlameRaptor. Inspired by Khalmee.TeamLoadoutViewer",
 	"LoadPriority": 2,
 	"RequiredOnClient": false,
-	"Version": "1.1.0",
+	"Version": "1.2.0",
 	"Scripts": [
 		{
 			"Path": "cl_titan_loadout_viewer.nut",
@@ -28,7 +28,12 @@
 			"DefaultValue": "1"
 		},
 		{
-            "Name": "comp_fd_master_to_insane",
+            "Name": "titanloadoutviewer_fd_force_hide_minimap",
+            "DefaultValue": "0",
+            "Flags": 16777216
+        },
+		{
+            "Name": "titanloadoutviewer_fd_force_hide_hud_icon",
             "DefaultValue": "0",
             "Flags": 16777216
         }
