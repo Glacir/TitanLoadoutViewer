@@ -643,7 +643,7 @@ void function UpdateTurretRuiIndeces()
 
 void function OnNPCTitanCreated( entity titan )
 {
-	if ( titan.GetTeam() == TEAM_IMC && FD_GetDifficultyLevel() < eFDDifficultyLevel.INSANE )
+	if ( titan.GetTeam() == TEAM_IMC && FD_GetDifficultyLevel() < (GetConVarBool("comp_fd_master_to_insane") ? eFDDifficultyLevel.MASTER : eFDDifficultyLevel.INSANE) )
 	{
 		thread AddOverheadIcon( titan, GetIconForTitanType( titan.GetTargetName() ) )
 	}

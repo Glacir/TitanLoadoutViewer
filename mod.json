@@ -26,6 +26,11 @@
 		{
 			"Name": "titanloadoutviewer_print_fd_items_count",
 			"DefaultValue": "1"
-		}
+		},
+		{
+            "Name": "comp_fd_master_to_insane",
+            "DefaultValue": "0",
+            "Flags": 16777216
+        }
 	]
 }
