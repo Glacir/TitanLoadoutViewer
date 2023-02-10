@@ -643,7 +643,7 @@ void function UpdateTurretRuiIndeces()
 
 void function OnNPCTitanCreated( entity titan )
 {
-	if ( titan.GetTeam() == TEAM_IMC && FD_GetDifficultyLevel() < eFDDifficultyLevel.INSANE && !GetConvarBool("titanloadoutviewer_fd_force_hide_hud_icon") )
+	if ( titan.GetTeam() == TEAM_IMC && FD_GetDifficultyLevel() < eFDDifficultyLevel.INSANE && !GetConVarBool("titanloadoutviewer_fd_force_hide_hud_icon") )
 	{
 		thread AddOverheadIcon( titan, GetIconForTitanType( titan.GetTargetName() ) )
 	}
@@ -667,10 +667,13 @@ void function OnPropScriptCreated( entity prop )
 			AddEntityCallback_GetUseEntOverrideText( prop, FD_BatteryPortCheckBattery )
 			break
 		case "mortarPosition":
-			var rui = AddOverheadIcon( prop, $"rui/hud/gametype_icons/fd/fd_icon_spectre_mortar", true, $"ui/overhead_icon_ellipse.rpak" )
-			RuiSetImage( rui, "iconBG", $"rui/hud/gametype_icons/fd/fd_icon_spectre_mortar_bg" )
-			RuiTrackFloat( rui, "arcPercent", prop, RUI_TRACK_SHIELD_FRACTION )
-			thread MortarPositionVisibilityTrack( rui, prop )
+			if(!GetConVarBool("titanloadoutviewer_fd_force_hide_hud_icon"))
+			{
+				var rui = AddOverheadIcon( prop, $"rui/hud/gametype_icons/fd/fd_icon_spectre_mortar", true, $"ui/overhead_icon_ellipse.rpak" )
+				RuiSetImage( rui, "iconBG", $"rui/hud/gametype_icons/fd/fd_icon_spectre_mortar_bg" )
+				RuiTrackFloat( rui, "arcPercent", prop, RUI_TRACK_SHIELD_FRACTION )
+				thread MortarPositionVisibilityTrack( rui, prop )
+			}
 			break
 		case "harvesterBoostPort":
 			AddEntityCallback_GetUseEntOverrideText( prop, FD_BatteryPortCheckBattery )
