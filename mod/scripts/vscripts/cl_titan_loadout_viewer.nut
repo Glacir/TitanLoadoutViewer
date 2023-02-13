@@ -129,7 +129,11 @@ void function PrintPlayerItemsCount( entity player ) {
     printt(format("Turrets: %i", numTurrets))
     printt(format("Shield Boosts: %i", numShieldBoosts))
     printt(format("Nuke Rodeos: %i", numCoreOverload))
+    PrintMonarchUpgrades(player)
+    printt("----------------")
+}
 
+void function PrintMonarchUpgrades(entity player) {
     if (player.IsTitan() && IsAlive(player))
     {
         entity titan = player
@@ -142,9 +146,69 @@ void function PrintPlayerItemsCount( entity player ) {
                     printt(Localize(GetItemName(passiveRef)))
                 }
             }
+            if (player.HasPassive(ePassives.PAS_VANGUARD_CORE1)) //Has Arc Rounds, Choose Energy Transfer or Missile Racks
+            {
+                if (HasMissleRacks(titan))
+                {
+                    PrintMonarchFDUpgrade(ePassives.PAS_VANGUARD_CORE2)
+                }
+                else if (HasEnergyTransfer(titan))
+                {
+                    PrintMonarchFDUpgrade(ePassives.PAS_VANGUARD_CORE3)
+                }
+            }
+            else if (player.HasPassive(ePassives.PAS_VANGUARD_CORE2)) //Has Missile Racks, Choose Energy Transfer or Arc Rounds
+            {
+                if (HasArcRounds(titan))
+                {
+                    PrintMonarchFDUpgrade(ePassives.PAS_VANGUARD_CORE1)
+                }
+                else if (HasEnergyTransfer(titan))
+                {
+                    PrintMonarchFDUpgrade(ePassives.PAS_VANGUARD_CORE3)
+                }
+            }
+            else if (player.HasPassive(ePassives.PAS_VANGUARD_CORE3)) //Has Energy Transfer, Choose Arc Rounds or Missile Racks
+            {
+                if (HasEnergyTransfer(titan))
+                {
+                    PrintMonarchFDUpgrade(ePassives.PAS_VANGUARD_CORE1)
+                }
+                else if (HasMissleRacks(titan))
+                {
+                    PrintMonarchFDUpgrade(ePassives.PAS_VANGUARD_CORE2)
+                }
+            }
         }
     }
-    printt("----------------")
+}
+
+bool function HasMissleRacks(entity titan) {
+    entity offhandWeapon = titan.GetOffhandWeapon( OFFHAND_RIGHT )
+    return offhandWeapon.HasMod("missile_racks")
+}
+
+bool function HasEnergyTransfer(entity titan) {
+    entity offhandWeapon = titan.GetOffhandWeapon( OFFHAND_LEFT )
+    return offhandWeapon.HasMod("energy_transfer")
+}
+
+bool function HasArcRounds(entity titan) {
+    array<entity> weapons = GetPrimaryWeapons( titan )
+    if ( weapons.len() > 0 )
+    {
+        entity primaryWeapon = weapons[0]
+        if ( IsValid( primaryWeapon ) )
+        {
+            return primaryWeapon.HasMod("arc_rounds")
+        }
+    }
+    return false
+}
+
+void function PrintMonarchFDUpgrade(int core) {
+
+    printt(format("%s: %s", Localize("#TITAN_UPGRADE4_TITLE"), Localize(GetItemName(PassiveEnumFromBitfield(core)))))
 }
 
 bool function ShouldPrintInfo( string player_name, float cur_time )
