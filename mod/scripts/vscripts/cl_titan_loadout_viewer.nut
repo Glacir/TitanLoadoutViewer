@@ -139,11 +139,22 @@ void function PrintMonarchUpgrades(entity player) {
         entity titan = player
         if (GetTitanClass(titan) == "vanguard")
         {
+            int index = 0
+            entity soul = player.GetTitanSoul()
+            int currentUpgrades = soul.GetTitanSoulNetInt( "upgradeCount" )
             foreach (core in monarch_upgrades) {
                 if(player.HasPassive(core))
                 {
                     string passiveRef = PassiveEnumFromBitfield(core)
-                    printt(Localize(GetItemName(passiveRef)))
+                    index++
+                    if (index <= currentUpgrades)
+                    {
+                        printt(Localize(GetItemName(passiveRef)) + " ✓")
+                    }
+                    else
+                    {
+                        printt(Localize(GetItemName(passiveRef)))
+                    }
                 }
             }
             if (player.HasPassive(ePassives.PAS_VANGUARD_CORE1)) //Has Arc Rounds, Choose Energy Transfer or Missile Racks
@@ -208,7 +219,7 @@ bool function HasArcRounds(entity titan) {
 
 void function PrintMonarchFDUpgrade(int core) {
 
-    printt(format("%s: %s", Localize("#TITAN_UPGRADE4_TITLE"), Localize(GetItemName(PassiveEnumFromBitfield(core)))))
+    printt(format("%s: %s ✓", Localize("#TITAN_UPGRADE4_TITLE"), Localize(GetItemName(PassiveEnumFromBitfield(core)))))
 }
 
 bool function ShouldPrintInfo( string player_name, float cur_time )

@@ -1,1 +1,3 @@
 mod/scripts/vscripts/client/cl_scoreboard_mp.nut
+deploy.bat
+deployignore.txt
