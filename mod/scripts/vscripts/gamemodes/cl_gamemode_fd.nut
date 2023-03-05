@@ -2458,7 +2458,7 @@ void function FD_ScoreboardUpdate( entity player, var rui )
 	int index = 0
 	index = AddTitanLoadoutIcons(player, rui, index)
 
-	for ( int i = 0; i < numTurrets; i++ )
+	for ( int i = 0; i < numTurrets && i < 2; i++ )
 	{
 		RuiSetImage( rui, "extraIcon" + index++, $"rui/menu/boosts/boost_icon_personel_sentry" )
 	}
