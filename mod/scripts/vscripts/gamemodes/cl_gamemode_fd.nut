@@ -93,8 +93,8 @@ void function ClGamemodeFD_Init()
 	AddCreateCallback( "player", OnPlayerCreated )
 	AddCallback_OnClientScriptInit( FD_OverrideMinimapPackages )
 
-	Minimap_SetZoomScale( 3.0 )
-	Minimap_SetSizeScale( 1.5 )
+	Minimap_SetZoomScale( GetConVarFloat("titanloadoutviewer_fd_minimap_zoom") )
+	Minimap_SetSizeScale( GetConVarFloat("titanloadoutviewer_fd_minimap_size") )
 
 	ClGameState_RegisterGameStateAsset( $"ui/gamestate_info_fd.rpak" )
 	SetGameModeScoreBarUpdateRules( GameModeScoreBarRules_FD )

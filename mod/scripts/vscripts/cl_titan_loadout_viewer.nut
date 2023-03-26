@@ -115,7 +115,7 @@ void function PrintPlayerItemsCount( entity player ) {
         return
 
     float cur_time = Time()
-    string player_name = player.GetPlayerName()
+    string player_name = player.GetPlayerNameWithClanTag()
     if (!ShouldPrintInfo(player_name, cur_time))
         return
 

@@ -14,4 +14,6 @@ void function TitanLoadoutViewerSettings()
 	AddModCategory("FD UI Settings (Set before round starts)")
 	AddConVarSettingEnum( "titanloadoutviewer_fd_force_hide_minimap", "Force hide minimap", [ "No", "Yes" ] )
 	AddConVarSettingEnum( "titanloadoutviewer_fd_force_hide_hud_icon", "Force hide enemy icons on HUD", [ "No", "Yes" ] )
+	AddConVarSetting( "titanloadoutviewer_fd_minimap_zoom", "Minimap zoom", "float" )
+	AddConVarSetting( "titanloadoutviewer_fd_minimap_size", "Minimap size", "float" )
 }
